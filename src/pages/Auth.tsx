@@ -85,7 +85,7 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl">Portfolio Analyzer</CardTitle>
+          <CardTitle className="text-2xl">Fonkly</CardTitle>
           <CardDescription>Login of registreer om te beginnen</CardDescription>
         </CardHeader>
         <CardContent>

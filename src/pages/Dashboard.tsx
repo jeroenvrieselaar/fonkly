@@ -51,7 +51,7 @@ const Dashboard = () => {
       <header className="border-b bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-900 to-teal-600 dark:from-blue-100 dark:to-teal-400 bg-clip-text text-transparent">
-            Portfolio Analyzer
+            Fonkly
           </h1>
           <div className="flex items-center gap-4">
             <span className="text-sm text-slate-600 dark:text-slate-400">
