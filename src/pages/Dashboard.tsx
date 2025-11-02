@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { User } from "@supabase/supabase-js";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { PortfolioForm } from "@/components/PortfolioForm";
+import { PortfolioList } from "@/components/PortfolioList";
 
 const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,36 +67,21 @@ const Dashboard = () => {
       <main className="container mx-auto px-4 py-8">
         <div className="grid gap-6">
           <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Welkom bij Portfolio Analyzer</h2>
-            <p className="text-slate-600 dark:text-slate-300">
-              Hier kun je straks je portefeuille analyseren op risicospreiding, sectoren, regio's en market cap.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold mb-2">Regio's</h3>
-              <p className="text-3xl font-bold text-blue-600">0</p>
-              <p className="text-sm text-slate-500">Portfolio's</p>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Mijn Portfolio's</h2>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button>Nieuw Portfolio</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Portfolio Toevoegen</DialogTitle>
+                  </DialogHeader>
+                  <PortfolioForm onSuccess={() => setRefresh(r => r + 1)} />
+                </DialogContent>
+              </Dialog>
             </div>
-            
-            <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold mb-2">Sectoren</h3>
-              <p className="text-3xl font-bold text-teal-600">0</p>
-              <p className="text-sm text-slate-500">Spreiding</p>
-            </div>
-            
-            <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold mb-2">Market Cap</h3>
-              <p className="text-3xl font-bold text-purple-600">0</p>
-              <p className="text-sm text-slate-500">Analyse</p>
-            </div>
-            
-            <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold mb-2">Risk Profile</h3>
-              <p className="text-3xl font-bold text-orange-600">0</p>
-              <p className="text-sm text-slate-500">Beoordeling</p>
-            </div>
+            <PortfolioList refresh={refresh} />
           </div>
         </div>
       </main>
